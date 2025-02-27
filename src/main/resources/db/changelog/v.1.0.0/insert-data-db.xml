@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+        xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.1.xsd">
+
+    <changeSet logicalFilePath="insert-data-db" id="insert-data-db" author="">
+
+        <insert tableName="users">
+            <column  name="email"  value="jon@mail.ru"/>
+            <column  name="full_name"  value="Jon Svarovcky"/>
+        </insert>
+        <insert tableName="users">
+            <column  name="email"  value="bob@mail.ru"/>
+            <column  name="full_name"  value="Bob Marly"/>
+        </insert>
+
+        <insert tableName="tasks">
+            <column  name="title"  value="Create REST APP"/>
+            <column  name="description"  value="Create REST APP for copmany"/>
+            <column  name="status"  value="PENDING"/>
+            <column  name="priority"  value="HIGH"/>
+            <column  name="createdAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="updatedAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="author_id"  value="1"/>
+            <column  name="assignee_id"  value="2"/>
+        </insert>
+        <insert tableName="tasks">
+            <column  name="title"  value="Write documentation REST APP"/>
+            <column  name="description"  value="Write documentation REST APP for copmany"/>
+            <column  name="status"  value="PENDING"/>
+            <column  name="priority"  value="LOW"/>
+            <column  name="createdAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="updatedAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="author_id"  value="2"/>
+            <column  name="assignee_id"  value="2"/>
+        </insert>
+        <insert tableName="tasks">
+            <column  name="title"  value="Write TEST REST APP"/>
+            <column  name="description"  value="Write TEST REST APP for company"/>
+            <column  name="status"  value="PENDING"/>
+            <column  name="priority"  value="MEDIUM"/>
+            <column  name="createdAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="updatedAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="author_id"  value="1"/>
+            <column  name="assignee_id"  value="1"/>
+        </insert>
+
+        <insert tableName="comments">
+            <column  name="title"  value="add DATA"/>
+            <column  name="createdAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="author_id"  value="1"/>
+            <column  name="task_id"  value="1"/>
+        </insert>
+        <insert tableName="comments">
+            <column  name="title"  value="add DATA"/>
+            <column  name="createdAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="author_id"  value="2"/>
+            <column  name="task_id"  value="1"/>
+        </insert>
+        <insert tableName="comments">
+            <column  name="title"  value="OK add DATA"/>
+            <column  name="createdAt"  valueComputed="CURRENT_TIMESTAMP"/>
+            <column  name="author_id"  value="2"/>
+            <column  name="task_id"  value="2"/>
+        </insert>
+
+    </changeSet>
+
+</databaseChangeLog>

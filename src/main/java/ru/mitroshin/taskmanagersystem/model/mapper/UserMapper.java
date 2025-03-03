@@ -31,4 +31,6 @@ public interface UserMapper {
     default Long countTasks(List<Task> tasks) {
         return (long) tasks.size();
     }
+
+    UserResponse userToUserResponse(org.springframework.security.core.userdetails.User referenceById);
 }

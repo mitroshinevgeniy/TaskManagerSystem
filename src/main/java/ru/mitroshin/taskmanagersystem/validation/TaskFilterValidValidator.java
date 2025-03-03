@@ -4,28 +4,15 @@ import jakarta.validation.ConstraintValidator;
 import jakarta.validation.ConstraintValidatorContext;
 import lombok.RequiredArgsConstructor;
 import org.apache.commons.lang3.ObjectUtils;
-import ru.learning.task_mgt_system.service.UserService;
-import ru.learning.task_mgt_system.web.dto.TaskFilter;
+import ru.mitroshin.taskmanagersystem.rest.dto.TaskFilter;
+import ru.mitroshin.taskmanagersystem.service.UserService;
 
-/**
- * Validator for the {@link TaskFilterValid} annotation.
- * This class ensures that the {@link TaskFilter} object meets the following criteria:
- * 1. Both pagination fields (page and size) are specified.
- * 2. At least one of the filtering criteria (authorId, assigneeId, or searchQuery) is provided.
- * 3. If provided, the authorId and assigneeId correspond to existing users.
- */
+
 @RequiredArgsConstructor
 public class TaskFilterValidValidator implements ConstraintValidator<TaskFilterValid, TaskFilter> {
 
     private final UserService userService;
 
-    /**
-     * Validates a {@link TaskFilter} object.
-     *
-     * @param value   the {@link TaskFilter} object to validate
-     * @param context the constraint validator context
-     * @return true if the object is valid, false otherwise
-     */
     @Override
     public boolean isValid(TaskFilter value, ConstraintValidatorContext context) {
 

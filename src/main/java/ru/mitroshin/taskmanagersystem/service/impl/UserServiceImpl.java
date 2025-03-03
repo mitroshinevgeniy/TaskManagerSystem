@@ -60,12 +60,12 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse getById(Long id) {
         log.info("Fetching user with id: {}", id);
-        return userMapper.userToUserResponse(userRepository.getReferenceById(id)
-                .orElseThrow(() -> {
-                    String message = MessageFormat.format("User not found with id: {0}.", id);
-                    log.error(message);
-                    return new EntityNotFoundException(message);
-                }));
+        return userMapper.userToUserResponse(userRepository.getReferenceById(id));
+//                .orElseThrow(() -> {
+//                    String message = MessageFormat.format("User not found with id: {0}.", id);
+//                    log.error(message);
+//                    return new EntityNotFoundException(message);
+//                }));
     }
 
     @Override

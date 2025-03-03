@@ -4,24 +4,17 @@ import lombok.RequiredArgsConstructor;
 import org.aspectj.lang.annotation.Aspect;
 import org.aspectj.lang.annotation.Before;
 import org.springframework.stereotype.Component;
-import ru.learning.task_mgt_system.exception.EntityNotFoundException;
-import ru.learning.task_mgt_system.model.Comment;
-import ru.learning.task_mgt_system.model.Task;
-import ru.learning.task_mgt_system.repository.CommentRepository;
-import ru.learning.task_mgt_system.repository.TaskRepository;
-import ru.learning.task_mgt_system.service.UserService;
-import ru.learning.task_mgt_system.web.dto.TaskRequest;
-import ru.learning.task_mgt_system.web.dto.UserInfo;
+import ru.mitroshin.taskmanagersystem.exception.EntityNotFoundException;
+import ru.mitroshin.taskmanagersystem.model.Comment;
+import ru.mitroshin.taskmanagersystem.model.Task;
+import ru.mitroshin.taskmanagersystem.repository.CommentRepository;
+import ru.mitroshin.taskmanagersystem.repository.TaskRepository;
+import ru.mitroshin.taskmanagersystem.rest.dto.UserInfo;
+import ru.mitroshin.taskmanagersystem.service.UserService;
+
 
 import java.text.MessageFormat;
 
-/**
- * Aspect for checking ownership and assignment before updating entities.
- * <p>
- * This aspect intercepts methods annotated with {@link CheckOwnershipAndAssignmentForUpdate} and performs checks
- * to ensure that the current user has the necessary permissions to update the specified entity.
- * </p>
- */
 @Aspect
 @Component
 @RequiredArgsConstructor
@@ -31,13 +24,6 @@ public class CheckOwnershipAndAssignmentForUpdateAspect {
     private final TaskRepository taskRepository;
     private final CommentRepository commentRepository;
 
-    /**
-     * Intercepts methods annotated with {@link CheckOwnershipAndAssignmentForUpdate} to check ownership and assignment.
-     *
-     * @param checkOwnershipAndAssignmentForUpdate annotation instance containing entity type information
-     * @param id                                   the ID of the entity being updated
-     * @param taskRequest                          the request data for the task update
-     */
     @Before("@annotation(checkOwnershipAndAssignmentForUpdate) && args(id, taskRequest,..)")
     public void checkOwnershipAndAssignmentForUpdate(CheckOwnershipAndAssignmentForUpdate checkOwnershipAndAssignmentForUpdate, Long id, TaskRequest taskRequest) {
         UserInfo currentUserInfo = userService.getCurrentUserInfo()

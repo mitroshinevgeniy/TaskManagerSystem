@@ -9,18 +9,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
-import ru.learning.task_mgt_system.service.CommentService;
-import ru.learning.task_mgt_system.validation.CheckOwnershipAndAssignmentForUpdate;
-import ru.learning.task_mgt_system.validation.CheckOwnershipForDelete;
-import ru.learning.task_mgt_system.validation.EntityType;
-import ru.learning.task_mgt_system.web.dto.CommentListResponse;
-import ru.learning.task_mgt_system.web.dto.CommentRequest;
-import ru.learning.task_mgt_system.web.dto.CommentResponse;
+import ru.mitroshin.taskmanagersystem.rest.dto.CommentListResponse;
+import ru.mitroshin.taskmanagersystem.rest.dto.CommentRequest;
+import ru.mitroshin.taskmanagersystem.rest.dto.CommentResponse;
+import ru.mitroshin.taskmanagersystem.service.CommentService;
+import ru.mitroshin.taskmanagersystem.validation.CheckOwnershipAndAssignmentForUpdate;
+import ru.mitroshin.taskmanagersystem.validation.CheckOwnershipForDelete;
+import ru.mitroshin.taskmanagersystem.validation.EntityType;
 
-/**
- * Controller for managing comments.
- * Provides methods for creating, updating, deleting, and retrieving comments.
- */
 @RestController
 @RequestMapping("/api/v1/comments")
 @RequiredArgsConstructor

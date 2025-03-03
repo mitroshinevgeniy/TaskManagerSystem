@@ -2,6 +2,7 @@ package ru.mitroshin.taskmanagersystem.service.impl;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.boot.autoconfigure.security.oauth2.resource.OAuth2ResourceServerProperties;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.Authentication;
@@ -59,7 +60,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public UserResponse getById(Long id) {
         log.info("Fetching user with id: {}", id);
-        return userMapper.userToUserResponse(userRepository.findById(id)
+        return userMapper.userToUserResponse(userRepository.getReferenceById(id)
                 .orElseThrow(() -> {
                     String message = MessageFormat.format("User not found with id: {0}.", id);
                     log.error(message);
@@ -82,7 +83,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public Optional<UserInfo> getCurrentUserInfo() {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
-        if (authentication != null && authentication.getPrincipal() instanceof Jwt jwt) {
+        if (authentication != null && authentication.getPrincipal() instanceof OAuth2ResourceServerProperties.Jwt jwt) {
             String email = (String) jwt.getClaims().get("preferred_username");
             log.info("Current user info retrieved: email={}", email);
             String givenName = (String) jwt.getClaims().get("given_name");

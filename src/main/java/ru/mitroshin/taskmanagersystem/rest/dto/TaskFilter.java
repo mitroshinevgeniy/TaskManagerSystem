@@ -14,12 +14,8 @@ import ru.mitroshin.taskmanagersystem.validation.TaskFilterValid;
 public class TaskFilter {
 
     private Integer size;
-
     private Integer page;
-
     private String searchQuery;
-
     private Long authorId;
-
     private Long assigneeId;
 }

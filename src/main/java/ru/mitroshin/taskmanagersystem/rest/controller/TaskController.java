@@ -9,16 +9,12 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.learning.task_mgt_system.service.TaskService;
-import ru.learning.task_mgt_system.validation.CheckOwnershipAndAssignmentForUpdate;
-import ru.learning.task_mgt_system.validation.CheckOwnershipForDelete;
-import ru.learning.task_mgt_system.validation.EntityType;
-import ru.learning.task_mgt_system.web.dto.*;
+import ru.mitroshin.taskmanagersystem.rest.dto.*;
+import ru.mitroshin.taskmanagersystem.service.TaskService;
+import ru.mitroshin.taskmanagersystem.validation.CheckOwnershipAndAssignmentForUpdate;
+import ru.mitroshin.taskmanagersystem.validation.CheckOwnershipForDelete;
+import ru.mitroshin.taskmanagersystem.validation.EntityType;
 
-/**
- * Controller for managing tasks.
- * Provides methods for creating, updating, deleting, and retrieving tasks.
- */
 @RestController
 @RequestMapping("/api/v1/tasks")
 @RequiredArgsConstructor
@@ -26,12 +22,6 @@ public class TaskController {
 
     private final TaskService taskService;
 
-    /**
-     * Retrieves tasks based on filter criteria.
-     *
-     * @param filter the filter criteria for retrieving tasks.
-     * @return a list of tasks that match the filter criteria.
-     */
     @Operation(
             summary = "Filter tasks by criteria",
             description = "Retrieves tasks based on filter criteria."
@@ -45,13 +35,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.filterBy(filter));
     }
 
-    /**
-     * Retrieves all tasks with pagination.
-     *
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of all tasks.
-     */
     @Operation(
             summary = "Get all tasks",
             description = "Retrieves all tasks with pagination.",
@@ -70,12 +53,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getAll(page, size));
     }
 
-    /**
-     * Retrieves a task by its identifier.
-     *
-     * @param id the identifier of the task.
-     * @return the found task with comments.
-     */
     @Operation(
             summary = "Get task by ID",
             description = "Retrieves a task by its identifier.",
@@ -92,12 +69,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getById(id));
     }
 
-    /**
-     * Creates a new task.
-     *
-     * @param taskRequest DTO with data for creating the task.
-     * @return the created task.
-     */
     @Operation(
             summary = "Create a new task",
             description = "Creates a new task with the provided data."
@@ -111,13 +82,6 @@ public class TaskController {
         return ResponseEntity.status(HttpStatus.CREATED).body(taskService.create(taskRequest));
     }
 
-    /**
-     * Updates an existing task.
-     *
-     * @param id the identifier of the task to update.
-     * @param taskRequest DTO with new data for the task.
-     * @return the updated task.
-     */
     @Operation(
             summary = "Update a task",
             description = "Updates an existing task with the provided data.",
@@ -137,12 +101,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.update(id, taskRequest));
     }
 
-    /**
-     * Deletes a task by its identifier.
-     *
-     * @param id the identifier of the task to delete.
-     * @return HTTP status 204 No Content if the task was deleted successfully.
-     */
     @Operation(
             summary = "Delete a task",
             description = "Deletes a task by its identifier.",
@@ -162,14 +120,6 @@ public class TaskController {
         return ResponseEntity.noContent().build();
     }
 
-    /**
-     * Retrieves tasks by status with pagination.
-     *
-     * @param status the status of the tasks.
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of tasks with the specified status.
-     */
     @Operation(
             summary = "Get tasks by status",
             description = "Retrieves tasks by status with pagination.",
@@ -190,14 +140,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getByStatus(status, page, size));
     }
 
-    /**
-     * Retrieves tasks by priority with pagination.
-     *
-     * @param priority the priority of the tasks.
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of tasks with the specified priority.
-     */
     @Operation(
             summary = "Get tasks by priority",
             description = "Retrieves tasks by priority with pagination.",
@@ -218,14 +160,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getByPriority(priority, page, size));
     }
 
-    /**
-     * Retrieves tasks by author ID with pagination.
-     *
-     * @param authorId the ID of the author.
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of tasks authored by the specified author.
-     */
     @Operation(
             summary = "Get tasks by author ID",
             description = "Retrieves tasks by author ID with pagination.",
@@ -246,14 +180,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getByAuthorId(authorId, page, size));
     }
 
-    /**
-     * Retrieves tasks by assignee ID with pagination.
-     *
-     * @param assigneeId the ID of the assignee.
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of tasks assigned to the specified assignee.
-     */
     @Operation(
             summary = "Get tasks by assignee ID",
             description = "Retrieves tasks by assignee ID with pagination.",
@@ -274,15 +200,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getByAssigneeId(assigneeId, page, size));
     }
 
-    /**
-     * Retrieves tasks by status and priority with pagination.
-     *
-     * @param status the status of the tasks.
-     * @param priority the priority of the tasks.
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of tasks with the specified status and priority.
-     */
     @Operation(
             summary = "Get tasks by status and priority",
             description = "Retrieves tasks by status and priority with pagination.",
@@ -305,16 +222,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getByStatusAndPriority(status, priority, page, size));
     }
 
-    /**
-     * Retrieves tasks by status, priority, and author ID with pagination.
-     *
-     * @param status the status of the tasks.
-     * @param priority the priority of the tasks.
-     * @param authorId the ID of the author.
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of tasks with the specified status, priority, and author ID.
-     */
     @Operation(
             summary = "Get tasks by status, priority, and author ID",
             description = "Retrieves tasks by status, priority, and author ID with pagination.",
@@ -339,16 +246,6 @@ public class TaskController {
         return ResponseEntity.ok(taskService.getByStatusAndPriorityAndAuthorId(status, priority, authorId, page, size));
     }
 
-    /**
-     * Retrieves tasks by status, priority, and assignee ID with pagination.
-     *
-     * @param status the status of the tasks.
-     * @param priority the priority of the tasks.
-     * @param assigneeId the ID of the assignee.
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of tasks with the specified status, priority, and assignee ID.
-     */
     @Operation(
             summary = "Get tasks by status, priority, and assignee ID",
             description = "Retrieves tasks by status, priority, and assignee ID with pagination.",

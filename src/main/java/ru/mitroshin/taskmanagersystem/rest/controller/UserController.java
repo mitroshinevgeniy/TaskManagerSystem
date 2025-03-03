@@ -7,14 +7,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import ru.learning.task_mgt_system.service.UserService;
-import ru.learning.task_mgt_system.web.dto.UserListResponse;
-import ru.learning.task_mgt_system.web.dto.UserResponse;
+import ru.mitroshin.taskmanagersystem.rest.dto.UserListResponse;
+import ru.mitroshin.taskmanagersystem.rest.dto.UserResponse;
+import ru.mitroshin.taskmanagersystem.service.UserService;
 
-/**
- * Controller for managing users.
- * Provides methods for retrieving user information.
- */
 @RestController
 @RequestMapping("/api/v1/users")
 @RequiredArgsConstructor
@@ -22,13 +18,6 @@ public class UserController {
 
     private final UserService userService;
 
-    /**
-     * Retrieves a paginated list of all users.
-     *
-     * @param page the page number for pagination (default is 0).
-     * @param size the page size for pagination (default is 10).
-     * @return a paginated list of all users.
-     */
     @Operation(
             summary = "Get all users",
             description = "Retrieves a paginated list of all users.",
@@ -47,12 +36,6 @@ public class UserController {
         return ResponseEntity.ok(userService.getAll(page, size));
     }
 
-    /**
-     * Retrieves a user by its identifier.
-     *
-     * @param id the identifier of the user.
-     * @return the user information.
-     */
     @Operation(
             summary = "Get user by ID",
             description = "Retrieves a user by its identifier.",

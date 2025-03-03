@@ -6,27 +6,19 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.support.DefaultMessageSourceResolvable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.core.AuthenticationException;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.MissingServletRequestParameterException;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestControllerAdvice;
-import ru.learning.task_mgt_system.exception.AccessDeniedException;
-import ru.learning.task_mgt_system.exception.AuthenticationException;
-import ru.learning.task_mgt_system.exception.EntityNotFoundException;
-import ru.learning.task_mgt_system.web.dto.ErrorResponse;
+import ru.mitroshin.taskmanagersystem.exception.EntityNotFoundException;
+import ru.mitroshin.taskmanagersystem.rest.dto.ErrorResponse;
 
 import java.text.MessageFormat;
 import java.util.List;
 
-/**
- * Controller for handling exceptions occurring in the REST API.
- * <p>
- * This class is used to intercept and handle various exceptions
- * that occur during the operation of controllers in the application,
- * and return appropriate error responses with status codes and messages.
- * </p>
- */
 @Slf4j
 @RestControllerAdvice
 public class ExceptionHandlerController {

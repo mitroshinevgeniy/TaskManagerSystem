@@ -1,5 +1,6 @@
 package ru.mitroshin.taskmanagersystem.service;
 
+import org.springframework.stereotype.Component;
 import ru.mitroshin.taskmanagersystem.rest.dto.CommentListResponse;
 import ru.mitroshin.taskmanagersystem.rest.dto.CommentRequest;
 import ru.mitroshin.taskmanagersystem.rest.dto.CommentResponse;
